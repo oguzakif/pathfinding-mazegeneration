@@ -11,15 +11,7 @@ function pathFinding(){
 
     //CHECKING PATH IS DONE
     pathDone = isPathDone();
-    //STEP 3
-    currentWay.showLine();
-
-
-  }
-  else if (isMazeDone){
-    button.mousePressed(showTheSolution);
-    if(solution)
-    currentWay.showLine();
+    
   }
 }
 

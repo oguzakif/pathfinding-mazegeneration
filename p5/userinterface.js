@@ -1,11 +1,16 @@
-var button;
 var solution = true;
+var start = false;
 var buttonh;
 var buttonw= buttonh*(2.5);
+var visibilityButton;
+var reGenerateButton;
+var startStopButton;
 
 var buttonDistance;
 
-var context = "Change the visibility of solution.";
+var contextStartStop = "Start/Stop";
+var contextVisibility = "Change the visibility of solution.";
+var contextReGenerate = "Regenerate the maze.";
 
 var second=0;
 function showInterface(){
@@ -18,32 +23,62 @@ function showInterface(){
 
     title.center();
 
-    showButton();
+    generateVisibility(contextVisibility);  //for the visibility button.
+    generateReButton(contextReGenerate);    //for the regenerating the maze without refreshing the page.
+    generateStartStop(contextStartStop);
 }
-function showButton(){
-    button = createButton(context);
-    button.size(buttonw,buttonh);
-    button.center();
+function generateVisibility(context){
+    visibilityButton = createButton(context);
+    visibilityButton.size(buttonw,buttonh);
+    visibilityButton.center();
     if(canvasx === 1000)
-    button.style('margin-top:800px');
+    visibilityButton.style('margin-top:800px; margin-left:175px');
 
     else
-    button.style('margin-top:600px');
+    visibilityButton.style('margin-top:600px');
 
 }
+function generateReButton(context){
+    reGenerateButton = createButton(context);
+    reGenerateButton.size(buttonw,buttonh);
+    reGenerateButton.center();
 
+    if(canvasx === 1000)
+    reGenerateButton.style('margin-top:800px; margin-left:-150px');
+
+    else
+    reGenerateButton.style('margin-top:600px ');
+}
+function generateStartStop(context){
+    startStopButton = createButton(context);
+    startStopButton.size(buttonw, buttonh);
+    startStopButton.center();
+
+    if(canvasx === 1000)
+    startStopButton.style('margin-top:800px');
+
+    else
+    startStopButton.style('');
+
+}
+function startStop(){
+    start = !start;
+}
 function showTheSolution(){
     solution = !solution;
 }
 function showStatistics(){
-    var statistics = "Solution Time: "+second+"\n"+
-    "Treaths: "+treaths;
+    var statistics ="Treaths: "+treaths;
     if(canvasx === 400){
-        text(statistics,10,canvasy+buttonDistance);
+        var statistic = text(statistics, canvasx, canvasy);
     }
 
     else{
-        text(statistics,canvasx+buttonDistance,0);
+        var statistic = text(statistics, canvasx, canvasy);
     }
     second++;
 }
+function refreshPage(){
+    window.location.reload();
+} 
+

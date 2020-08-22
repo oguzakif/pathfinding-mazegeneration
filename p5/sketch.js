@@ -83,7 +83,16 @@ function draw() {
   }
   showStatistics();
 
+  if(start)
   pathFinding();
+
+  if(solution)
+  currentWay.showLine();
+
+  reGenerateButton.mousePressed(refreshPage);
+  visibilityButton.mousePressed(showTheSolution);
+  startStopButton.mousePressed(startStop);
+
   
 }
 
