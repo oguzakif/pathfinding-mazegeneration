@@ -102,7 +102,3 @@ function index(i, j){
   }
   return i+j*cols;
 }
-//add multiple solutions to the maze by starting the algorithm again and again.
-//how many times algorithm will start again is defined by random func.
-//random func will contain 1-5 numbers.
-//if it will not work, try another solution.
