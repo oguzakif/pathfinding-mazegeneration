@@ -34,7 +34,6 @@ myFunction(x) // Call listener function at run time
 var cols;
 var rows;
 var grid = [];
-var walls = [];
 var current;
 
 var stack = [];
@@ -69,12 +68,8 @@ function setup() {
   currentWay.lastPeek().wayVisited =true;
   grid[grid.length-1].finish = true;
   finishNode = grid[grid.length-1];
-  //initStatistics();
 
-  while(!isMazeDone)
-  {
-  generateMaze();
-  }
+  mazeController();
 }
 
 function draw() {
@@ -91,7 +86,7 @@ function draw() {
   if(solution)
   currentWay.showLine();
 
-  reGenerateButton.mousePressed(refreshPage);
+  reGenerateButton.mousePressed(refreshMaze);
   visibilityButton.mousePressed(showTheSolution);
   startStopButton.mousePressed(startStop);
 

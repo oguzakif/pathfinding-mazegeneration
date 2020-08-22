@@ -1,3 +1,10 @@
+function mazeController(){
+  while(!isMazeDone)
+  {
+  generateMaze();
+  }
+}
+
 function generateMaze(){
       if(!isMazeDone){
         current.visited = true;

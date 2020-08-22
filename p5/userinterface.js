@@ -81,4 +81,30 @@ function showStatistics(){
 function refreshPage(){
     window.location.reload();
 } 
+function refreshMaze(){
+    setToInitial();
+
+    mazeController();
+}
+function setToInitial(){
+    grid = [];
+    for(var j =0; j < rows;j++){
+        for(var i =0;i<cols;i++){
+          var cell = new Cell(i,j);
+          grid.push(cell);
+        }
+    }
+    isMazeDone = false;
+    pathDone = false;
+    isPathAvailable = true;
+    treaths =0;
+    currentWay.elements = [];
+    current = grid[0];
+    grid[0].start = true;
+    startNode = grid[0];
+    currentWay.enqueue(startNode);
+    currentWay.lastPeek().wayVisited =true;
+    grid[grid.length-1].finish = true;
+    finishNode = grid[grid.length-1];
+}
 
