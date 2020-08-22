@@ -66,6 +66,7 @@ function setup() {
   startNode = grid[0];
   currentWay.enqueue(startNode);
   currentWay.lastPeek().wayVisited =true;
+  grid[grid.length-1].finish = true;
   finishNode = grid[grid.length-1];
   //initStatistics();
 

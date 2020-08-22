@@ -7,6 +7,7 @@ function Cell(i, j){
     this.walls = [true,true,true,true]; //top,right,bottom,left
     this.visited = false;
     this.wayVisited = false;
+    this.finish = false;
 
     this.highlight = function(){
       var x = this.i*size;
@@ -48,15 +49,15 @@ function Cell(i, j){
   
       if(this.visited){
         noStroke();
-      fill(249,238,226,300);
+        fill(249,238,226,300);
 
         rect(x,y,size,size);
       }
-      /*if(this.wayVisited){
+      if(this.finish) {
         noStroke();
-        fill(244,164,96,300);
+        fill(255,0,0,300);
         rect(x,y,size,size);
-      }*/
+      }
     }
   
     this.checkNeighbors = function(){
