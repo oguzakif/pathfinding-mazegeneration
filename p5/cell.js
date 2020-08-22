@@ -8,6 +8,7 @@ function Cell(i, j){
     this.visited = false;
     this.wayVisited = false;
     this.finish = false;
+    this.start = false;
 
     this.highlight = function(){
       var x = this.i*size;
@@ -56,6 +57,11 @@ function Cell(i, j){
       if(this.finish) {
         noStroke();
         fill(255,0,0,300);
+        rect(x,y,size,size);
+      }
+      if(this.start){
+        noStroke();
+        fill(0,0,255,300);
         rect(x,y,size,size);
       }
     }

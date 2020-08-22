@@ -63,6 +63,7 @@ function setup() {
     }
   }
   current = grid[0];
+  grid[0].start = true;
   startNode = grid[0];
   currentWay.enqueue(startNode);
   currentWay.lastPeek().wayVisited =true;
