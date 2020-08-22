@@ -35,7 +35,7 @@ function generateVisibility(context){
     visibilityButton.style('margin-top:800px; margin-left:175px');
 
     else
-    visibilityButton.style('margin-top:530px; ');
+    visibilityButton.style('margin-top:530px ');
 
 }
 function generateReButton(context){
@@ -47,7 +47,7 @@ function generateReButton(context){
     reGenerateButton.style('margin-top:800px; margin-left:-150px');
 
     else
-    reGenerateButton.style('margin-top:450px;');
+    reGenerateButton.style('margin-top:450px');
 }
 function generateStartStop(context){
     startStopButton = createButton(context);
