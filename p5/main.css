@@ -2,14 +2,17 @@ button {
     font-size: 15px !important;
     background-color: #9c3725;
     border-color:black !important;
-    border-radius:2%;
+    border-radius:5px;
+    color: rgb(249,238,226);
+    font-weight:bold;
     border-style: solid;
     transition-duration:1s;
 
 }
 button:hover{
     transition-duration: 1s;
-   /* background-color: #657786;*/
+    background-color: rgb(249,238,226);
+    color: black;
 }
 canvas {
     padding: 0;
