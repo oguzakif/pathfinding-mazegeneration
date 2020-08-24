@@ -8,16 +8,16 @@ var size;
 
 function myFunction(x) {
   if (x.matches) { // If media query matches
-    canvasx = 400;
-    canvasy = 200;
+    canvasx = 480;
+    canvasy = 360;
     
     size = 10;
 
     buttonh = 25;
     buttonDistance = 100;
   } else {
-    canvasx = 1000;
-    canvasy = 500;
+    canvasx = 1280;
+    canvasy = 720;
     
     size = 20;
 

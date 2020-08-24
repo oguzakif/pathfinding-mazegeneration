@@ -5,6 +5,7 @@ var buttonw= buttonh*(2.5);
 var visibilityButton;
 var reGenerateButton;
 var startStopButton;
+var select;
 
 var buttonDistance;
 
@@ -15,7 +16,7 @@ var contextReGenerate = "Regenerate the maze.";
 var second=0;
 function showInterface(){
     var title = createElement('h1',"Maze Generation and PathFinding");
-    if(canvasx === 1000)
+    if(canvasx === 1280)
     title.style('color:#F9eee2; font-size:50px');
 
     else 
@@ -26,16 +27,54 @@ function showInterface(){
     generateVisibility(contextVisibility);  //for the visibility button.
     generateReButton(contextReGenerate);    //for the regenerating the maze without refreshing the page.
     generateStartStop(contextStartStop);
+    initSelect();
+}
+function initSelect(){
+    select = createSelect();
+    select.option("32x18 Maze");
+    select.option("64x36 Maze (initial)");
+    select.option("128x72 Maze");
+    select.selected("64x36 Maze (initial)");
+    select.center();
+    select.changed(mySelectEvent);
+
+}
+function mySelectEvent(){
+    var item = select.value();
+    if(item === "64x36 Maze (initial)")
+    {
+        if(canvasx === 1280)
+        size = 20;
+
+        else
+        size = 10;
+    }
+    else if(item === "32x18 Maze")
+    {
+        if(canvasx === 1280)
+        size =40;
+
+        else 
+        size =20;
+    }
+    else if(item === "128x72 Maze"){
+        if(canvasx === 1280)
+        size = 10;
+
+        else
+        size = 5;
+    }
+    refreshMaze();
 }
 function generateVisibility(context){
     visibilityButton = createButton(context);
     visibilityButton.size(buttonw,buttonh);
     visibilityButton.center();
-    if(canvasx === 1000)
-    visibilityButton.style('margin-top:800px; margin-left:175px');
+    if(canvasx === 1280)
+    visibilityButton.style('margin-top:840px; margin-left:175px');
 
     else
-    visibilityButton.style('margin-top:530px ');
+    visibilityButton.style('margin-top:600px ');
 
 }
 function generateReButton(context){
@@ -43,22 +82,22 @@ function generateReButton(context){
     reGenerateButton.size(buttonw,buttonh);
     reGenerateButton.center();
 
-    if(canvasx === 1000)
-    reGenerateButton.style('margin-top:800px; margin-left:-150px');
+    if(canvasx === 1280)
+    reGenerateButton.style('margin-top:840px; margin-left:-150px');
 
     else
-    reGenerateButton.style('margin-top:450px');
+    reGenerateButton.style('margin-top:520px');
 }
 function generateStartStop(context){
     startStopButton = createButton(context);
     startStopButton.size(buttonw, buttonh);
     startStopButton.center();
 
-    if(canvasx === 1000)
-    startStopButton.style('margin-top:800px');
+    if(canvasx === 1280)
+    startStopButton.style('margin-top:840px');
 
     else
-    startStopButton.style('margin-top:490px');
+    startStopButton.style('margin-top:560px');
 
 }
 function startStop(){
@@ -87,6 +126,8 @@ function refreshMaze(){
     mazeController();
 }
 function setToInitial(){
+    cols = floor(width/size);
+    rows = floor(height/size);
     grid = [];
     for(var j =0; j < rows;j++){
         for(var i =0;i<cols;i++){
