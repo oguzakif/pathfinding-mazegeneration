@@ -20,7 +20,19 @@ function tracePath(){
     var flag;
     var traceNode;
     var wallCounter = 0;
-   
+    
+    
+    if(!currentWay.lastPeek().walls[1] && currentWay.lastPeek().i < cols-1){
+      wallCounter++;
+      var right   = grid[index(currentWay.lastPeek().i+1 ,currentWay.lastPeek().j)];
+  
+      if(!right.wayVisited){
+        counter++;
+        if(!(counter > 1))
+        traceNode = right;
+      }
+      
+    }
   
     if(!currentWay.lastPeek().walls[2] && currentWay.lastPeek().j < rows -1) {
       wallCounter++;
@@ -35,17 +47,7 @@ function tracePath(){
       
     }
 
-    if(!currentWay.lastPeek().walls[1] && currentWay.lastPeek().i < cols-1){
-      wallCounter++;
-      var right   = grid[index(currentWay.lastPeek().i+1 ,currentWay.lastPeek().j)];
-  
-      if(!right.wayVisited){
-        counter++;
-        if(!(counter > 1))
-        traceNode = right;
-      }
-      
-    }
+    
 
     if(!currentWay.lastPeek().walls[0] && currentWay.lastPeek().j > 0) {
       wallCounter++;

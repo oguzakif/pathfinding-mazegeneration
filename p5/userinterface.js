@@ -31,38 +31,47 @@ function showInterface(){
 }
 function initSelect(){
     select = createSelect();
-    select.option("32x18 Maze");
-    select.option("64x36 Maze (initial)");
-    select.option("128x72 Maze");
-    select.selected("64x36 Maze (initial)");
+    if(canvasx === 1280){
+        select.option("32x18 Maze");
+        select.option("64x36 Maze (initial)");
+        select.option("128x72 Maze");
+        select.selected("64x36 Maze (initial)");
+    }
+    else{
+        select.option("20x15 Maze");
+        select.option("40x30 Maze (initial)");
+        select.option("80x60 Maze");
+        select.selected("40x30 Maze (initial)");
+    }
+    
     select.center();
     select.changed(mySelectEvent);
 
 }
 function mySelectEvent(){
     var item = select.value();
-    if(item === "64x36 Maze (initial)")
+    if(item === "64x36 Maze (initial)" || item === "40x30 Maze (initial)")
     {
         if(canvasx === 1280)
         size = 20;
 
         else
-        size = 10;
+        size = 8;
     }
-    else if(item === "32x18 Maze")
+    else if(item === "20x15 Maze" || item === "20x15 Maze")
     {
         if(canvasx === 1280)
         size =40;
 
         else 
-        size =20;
+        size =16;
     }
-    else if(item === "128x72 Maze"){
+    else if(item === "128x72 Maze" || item === "80x60 Maze"){
         if(canvasx === 1280)
         size = 10;
 
         else
-        size = 5;
+        size = 4;
     }
     refreshMaze();
 }
