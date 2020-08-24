@@ -83,7 +83,7 @@ function generateVisibility(context){
     visibilityButton.style('margin-top:840px; margin-left:175px');
 
     else
-    visibilityButton.style('margin-top:580px ');
+    visibilityButton.style('margin-top:540px ');
 
 }
 function generateReButton(context){
@@ -95,7 +95,7 @@ function generateReButton(context){
     reGenerateButton.style('margin-top:840px; margin-left:-150px');
 
     else
-    reGenerateButton.style('margin-top:500px');
+    reGenerateButton.style('margin-top:460px');
 }
 function generateStartStop(context){
     startStopButton = createButton(context);
@@ -106,7 +106,7 @@ function generateStartStop(context){
     startStopButton.style('margin-top:840px');
 
     else
-    startStopButton.style('margin-top:540px');
+    startStopButton.style('margin-top:500px');
 
 }
 function startStop(){
