@@ -54,6 +54,11 @@ function Cell(i, j){
 
         rect(x,y,size,size);
       }
+      if(this.wayVisited){
+        noStroke();
+        fill(31,216,216,300);
+        rect(x,y,size,size);
+      }
       if(this.finish) {
         noStroke();
         fill(255,0,0,300);

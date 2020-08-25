@@ -46,6 +46,7 @@ var finishNode;
 var pathDone = false;
 var isPathAvailable = true;
 var treaths =0;
+var wayIndex=0;
 
 function setup() {
   createCanvas(canvasx,canvasy);
@@ -83,8 +84,12 @@ function draw() {
   if(start)
   pathFinding();
 
-  if(solution)
-  currentWay.showLine();
+  if(solution && pathDone){
+    if(wayIndex < currentWay.size())
+    wayIndex++;
+
+    currentWay.showLine(wayIndex);
+  }
 
   reGenerateButton.mousePressed(refreshMaze);
   visibilityButton.mousePressed(showTheSolution);

@@ -148,6 +148,7 @@ function setToInitial(){
     pathDone = false;
     isPathAvailable = true;
     treaths =0;
+    wayIndex =0;
     currentWay.elements = [];
     current = grid[0];
     grid[0].start = true;
