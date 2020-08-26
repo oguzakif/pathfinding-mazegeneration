@@ -37,16 +37,18 @@ function Cell(i, j){
       var y = this.j*size;
       stroke(23,29,75,300);
       if(this.walls[0])
-      line(x,y,x+size,y);
+        line(x,y,x+size,y);
+      
+      
   
       if(this.walls[1])
-      line(x+size,y,x+size,y+size);
+        line(x+size,y,x+size,y+size);
   
       if(this.walls[2])
-      line(x+size,y+size,x,y+size);
+        line(x+size,y+size,x,y+size);
   
       if(this.walls[3])
-      line(x,y+size,x,y);
+        line(x,y+size,x,y);
   
       if(this.visited){
         noStroke();

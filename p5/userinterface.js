@@ -15,7 +15,7 @@ var contextReGenerate = "Regenerate the maze.";
 
 var second=0;
 function showInterface(){
-    var title = createElement('h1',"Maze Generation and PathFinding");
+    var title = createElement('h1',"Maze Generation and Pathfinding");
     if(canvasx === 1280)
     title.style('color:#F9eee2; font-size:50px');
 
