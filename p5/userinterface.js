@@ -58,7 +58,7 @@ function mySelectEvent(){
         else
         size = 8;
     }
-    else if(item === "20x15 Maze" || item === "20x15 Maze")
+    else if(item === "32x18 Maze" || item === "20x15 Maze")
     {
         if(canvasx === 1280)
         size =40;

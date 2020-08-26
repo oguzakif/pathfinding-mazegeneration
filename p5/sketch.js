@@ -84,12 +84,8 @@ function draw() {
   if(start)
   pathFinding();
 
-  if(solution && pathDone){
-    if(wayIndex < currentWay.size())
-    wayIndex++;
-
-    currentWay.showLine(wayIndex);
-  }
+  if(solution)
+  currentWay.showLine();
 
   reGenerateButton.mousePressed(refreshMaze);
   visibilityButton.mousePressed(showTheSolution);

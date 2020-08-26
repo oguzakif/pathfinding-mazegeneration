@@ -28,11 +28,10 @@ function Queue() {
         return this.elements.length;
     }
 
-    this.showLine = function(wayIndex){
+    this.showLine = function(){
         var x;
         var y;
-            stroke(0);
-            for(var i=0;i<wayIndex;i++){
+            for(var i=0;i<this.size();i++){
                 x = this.elements[i].i*size;
                 y = this.elements[i].j*size;
                 stroke(0);
