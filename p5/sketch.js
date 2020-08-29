@@ -71,6 +71,7 @@ function setup() {
   finishNode = grid[grid.length-1];
 
   mazeController();
+  pathFindingController();
 }
 
 function draw() {
@@ -81,15 +82,25 @@ function draw() {
   }
   showStatistics();
 
-  if(start)
-  pathFinding();
+  if(solution && start && !directShowBool){
+    if(wayIndex < currentWay.size())
+    wayIndex++;
 
-  if(solution)
-  currentWay.showLine();
+    currentWay.showLine(wayIndex);
+  }
+  else if(solution && !start && !directShowBool){
+    currentWay.showLine(wayIndex);
+  }
+  else if(solution && directShowBool){
+    currentWay.showDirectly();
+  }
+
 
   reGenerateButton.mousePressed(refreshMaze);
   visibilityButton.mousePressed(showTheSolution);
   startStopButton.mousePressed(startStop);
+  solutionButton.mousePressed(directShow);
+  //startTimer();
 
   
 }

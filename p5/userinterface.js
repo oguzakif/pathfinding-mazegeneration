@@ -1,10 +1,13 @@
 var solution = true;
+var directShowBool = false;
 var start = false;
 var buttonh;
 var buttonw= buttonh*(2.5);
 var visibilityButton;
 var reGenerateButton;
 var startStopButton;
+var solutionButton;
+
 var select;
 
 var buttonDistance;
@@ -12,6 +15,7 @@ var buttonDistance;
 var contextStartStop = "Start/Stop";
 var contextVisibility = "Change the visibility of solution.";
 var contextReGenerate = "Regenerate the maze.";
+var contextSolution = "Just show me the solution.";
 
 var second=0;
 function showInterface(){
@@ -27,6 +31,7 @@ function showInterface(){
     generateVisibility(contextVisibility);  //for the visibility button.
     generateReButton(contextReGenerate);    //for the regenerating the maze without refreshing the page.
     generateStartStop(contextStartStop);
+    generateDirectSolution(contextSolution);
     initSelect();
 }
 function initSelect(){
@@ -97,6 +102,17 @@ function generateReButton(context){
     else
     reGenerateButton.style('margin-top:460px');
 }
+function generateDirectSolution(context){
+    solutionButton = createButton(context);
+    solutionButton.size(buttonw, buttonh);
+    solutionButton.center();
+
+    if(canvasx === 1280)
+    solutionButton.style('margin-top:840px; margin-left: -350px');
+
+    else
+    solutionButton.style('margin-top: 570px');
+}
 function generateStartStop(context){
     startStopButton = createButton(context);
     startStopButton.size(buttonw, buttonh);
@@ -115,16 +131,18 @@ function startStop(){
 function showTheSolution(){
     solution = !solution;
 }
+function directShow(){
+    directShowBool = !directShowBool;
+}
 function showStatistics(){
-    var statistics ="Treaths: "+treaths;
-    if(canvasx === 400){
-        var statistic = text(statistics, canvasx, canvasy);
+    var statistics ="Treaths: "+treaths+"\n"+"Second: "+second;
+    if(canvasx === 1280){
+        text(statistics);
     }
 
     else{
-        var statistic = text(statistics, canvasx, canvasy);
+        text(statistics, canvasx, canvasy);
     }
-    second++;
 }
 function refreshPage(){
     window.location.reload();
@@ -133,6 +151,8 @@ function refreshMaze(){
     setToInitial();
 
     mazeController();
+
+    pathFindingController();
 }
 function setToInitial(){
     cols = floor(width/size);
@@ -157,5 +177,7 @@ function setToInitial(){
     currentWay.lastPeek().wayVisited =true;
     grid[grid.length-1].finish = true;
     finishNode = grid[grid.length-1];
+    start = false;
+    directShowBool = false;
 }
 

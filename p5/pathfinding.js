@@ -1,3 +1,9 @@
+function pathFindingController(){
+  while(isMazeDone && !pathDone){
+    pathFinding();
+  }
+}
+
 function pathFinding(){
     //Path Finding
   if(isMazeDone && !pathDone){

@@ -56,11 +56,11 @@ function Cell(i, j){
 
         rect(x,y,size,size);
       }
-      if(this.wayVisited && solution){
+     /* if((this.wayVisited && solution) && (start || directShowBool)){
         noStroke();
         fill(31,216,216,300);
         rect(x,y,size,size);
-      }
+      }*/
       if(this.finish) {
         noStroke();
         fill(255,0,0,300);
