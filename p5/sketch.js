@@ -2,28 +2,20 @@
 //by Oğuz Akif Tüfekcioğlu
 //aka sonofrifleman
 
-var canvasx;
-var canvasy;
+var canvasx = window.screen.width;
+var canvasy = 2*canvasx/5;
 var size;
 
 function myFunction(x) {
   if (x.matches) { // If media query matches
-    canvasx = 700;
-    canvasy = 240;
-    
     size = 10;
     
   } else {
-    canvasx = 1920;
-    canvasy = 720;
-    
     size = 20;
-   
   }
 }
 
 var x = window.matchMedia("(max-width: 700px)")
-console.log(x)
 myFunction(x) // Call listener function at run time
 //x.addListener(myFunction) // Attach listener function on state changes
 

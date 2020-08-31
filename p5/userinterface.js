@@ -10,7 +10,7 @@ function mySelectEvent(){
     console.log(document.getElementById("mazeSize").value);
     if(item === "smallSize")
     {
-        if(canvasx === 1920)
+        if(canvasx > 700)
         size = 40;
 
         else
@@ -18,14 +18,14 @@ function mySelectEvent(){
     }
     else if(item === "mediumSize")
     {
-        if(canvasx === 1920)
+        if(canvasx > 700)
         size =20;
 
         else 
         size =10;
     }
     else if(item === "largeSize"){
-        if(canvasx === 1920)
+        if(canvasx > 700)
         size = 10;
 
         else
