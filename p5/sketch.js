@@ -8,26 +8,22 @@ var size;
 
 function myFunction(x) {
   if (x.matches) { // If media query matches
-    canvasx = 320;
+    canvasx = 700;
     canvasy = 240;
     
-    size = 8;
-
-    buttonh = 25;
-    buttonDistance = 100;
+    size = 10;
+    
   } else {
-    canvasx = 1280;
+    canvasx = 1920;
     canvasy = 720;
     
     size = 20;
-
-    buttonh = 50;
-    buttonDistance = 200;
    
   }
 }
 
 var x = window.matchMedia("(max-width: 700px)")
+console.log(x)
 myFunction(x) // Call listener function at run time
 //x.addListener(myFunction) // Attach listener function on state changes
 
@@ -48,9 +44,12 @@ var isPathAvailable = true;
 var treaths =0;
 var wayIndex=0;
 
+function preload(){
+  
+}
 function setup() {
+  p5.disableFriendlyErrors = true;
   createCanvas(canvasx,canvasy);
-  showInterface();
 
   cols = floor(width/size);
   rows = floor(height/size);
@@ -72,15 +71,13 @@ function setup() {
 
   mazeController();
   pathFindingController();
+
 }
 
 function draw() {
-  background(50);
-  
   for(var i =0;i<grid.length;i++){
     grid[i].show();
   }
-  showStatistics();
 
   if(solution && start && !directShowBool){
     if(wayIndex < currentWay.size())
@@ -94,12 +91,6 @@ function draw() {
   else if(solution && directShowBool){
     currentWay.showDirectly();
   }
-
-
-  reGenerateButton.mousePressed(refreshMaze);
-  visibilityButton.mousePressed(showTheSolution);
-  startStopButton.mousePressed(startStop);
-  solutionButton.mousePressed(directShow);
   //startTimer();
 
   

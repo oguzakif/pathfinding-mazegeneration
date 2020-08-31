@@ -14,7 +14,7 @@ function Cell(i, j){
       var x = this.i*size;
       var y = this.j*size;
       noStroke();
-      fill(153,55,37,300);
+      fill(221,93,0,300);
 
       rect(x,y,size,size);
     }
@@ -52,15 +52,10 @@ function Cell(i, j){
   
       if(this.visited){
         noStroke();
-        fill(249,238,226,300);
+        fill(242,241,211,300);
 
         rect(x,y,size,size);
       }
-     /* if((this.wayVisited && solution) && (start || directShowBool)){
-        noStroke();
-        fill(31,216,216,300);
-        rect(x,y,size,size);
-      }*/
       if(this.finish) {
         noStroke();
         fill(255,0,0,300);

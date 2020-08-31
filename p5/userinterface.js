@@ -1,129 +1,37 @@
 var solution = true;
 var directShowBool = false;
 var start = false;
-var buttonh;
-var buttonw= buttonh*(2.5);
-var visibilityButton;
-var reGenerateButton;
-var startStopButton;
-var solutionButton;
 
-var select;
-
-var buttonDistance;
-
-var contextStartStop = "Start/Stop";
-var contextVisibility = "Change the visibility of solution.";
-var contextReGenerate = "Regenerate the maze.";
-var contextSolution = "Just show me the solution.";
 
 var second=0;
-function showInterface(){
-    var title = createElement('h1',"Maze Generation and Pathfinding");
-    if(canvasx === 1280)
-    title.style('color:#F9eee2; font-size:50px');
 
-    else 
-    title.style('color:#F9eee2; font-size:25px');
-
-    title.center();
-
-    generateVisibility(contextVisibility);  //for the visibility button.
-    generateReButton(contextReGenerate);    //for the regenerating the maze without refreshing the page.
-    generateStartStop(contextStartStop);
-    generateDirectSolution(contextSolution);
-    initSelect();
-}
-function initSelect(){
-    select = createSelect();
-    if(canvasx === 1280){
-        select.option("32x18 Maze");
-        select.option("64x36 Maze (initial)");
-        select.option("128x72 Maze");
-        select.selected("64x36 Maze (initial)");
-    }
-    else{
-        select.option("20x15 Maze");
-        select.option("40x30 Maze (initial)");
-        select.option("80x60 Maze");
-        select.selected("40x30 Maze (initial)");
-    }
-    
-    select.center();
-    select.changed(mySelectEvent);
-
-}
 function mySelectEvent(){
-    var item = select.value();
-    if(item === "64x36 Maze (initial)" || item === "40x30 Maze (initial)")
+    var item = document.getElementById("mazeSize").value;
+    console.log(document.getElementById("mazeSize").value);
+    if(item === "smallSize")
     {
-        if(canvasx === 1280)
-        size = 20;
+        if(canvasx === 1920)
+        size = 40;
 
         else
-        size = 8;
+        size = 20;
     }
-    else if(item === "32x18 Maze" || item === "20x15 Maze")
+    else if(item === "mediumSize")
     {
-        if(canvasx === 1280)
-        size =40;
+        if(canvasx === 1920)
+        size =20;
 
         else 
-        size =16;
+        size =10;
     }
-    else if(item === "128x72 Maze" || item === "80x60 Maze"){
-        if(canvasx === 1280)
+    else if(item === "largeSize"){
+        if(canvasx === 1920)
         size = 10;
 
         else
-        size = 4;
+        size = 5;
     }
     refreshMaze();
-}
-function generateVisibility(context){
-    visibilityButton = createButton(context);
-    visibilityButton.size(buttonw,buttonh);
-    visibilityButton.center();
-    if(canvasx === 1280)
-    visibilityButton.style('margin-top:840px; margin-left:175px');
-
-    else
-    visibilityButton.style('margin-top:540px ');
-
-}
-function generateReButton(context){
-    reGenerateButton = createButton(context);
-    reGenerateButton.size(buttonw,buttonh);
-    reGenerateButton.center();
-
-    if(canvasx === 1280)
-    reGenerateButton.style('margin-top:840px; margin-left:-150px');
-
-    else
-    reGenerateButton.style('margin-top:460px');
-}
-function generateDirectSolution(context){
-    solutionButton = createButton(context);
-    solutionButton.size(buttonw, buttonh);
-    solutionButton.center();
-
-    if(canvasx === 1280)
-    solutionButton.style('margin-top:840px; margin-left: -350px');
-
-    else
-    solutionButton.style('margin-top: 570px');
-}
-function generateStartStop(context){
-    startStopButton = createButton(context);
-    startStopButton.size(buttonw, buttonh);
-    startStopButton.center();
-
-    if(canvasx === 1280)
-    startStopButton.style('margin-top:840px');
-
-    else
-    startStopButton.style('margin-top:500px');
-
 }
 function startStop(){
     start = !start;
@@ -134,19 +42,6 @@ function showTheSolution(){
 function directShow(){
     directShowBool = !directShowBool;
 }
-function showStatistics(){
-    var statistics ="Treaths: "+treaths+"\n"+"Second: "+second;
-    if(canvasx === 1280){
-        text(statistics);
-    }
-
-    else{
-        text(statistics, canvasx, canvasy);
-    }
-}
-function refreshPage(){
-    window.location.reload();
-} 
 function refreshMaze(){
     setToInitial();
 

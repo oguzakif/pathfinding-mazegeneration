@@ -4,7 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel ="stylesheet" href = "bootstrap/css/bootstrap.min.css">
   <link rel ="stylesheet" href = "p5/main.css">
+
   <title>Maze Generation and PathFinding</title>
   <style>
     body {
@@ -13,6 +15,8 @@
       background-color: #182F53;
     }
   </style>
+  <script src="bootstrap/js/jquery-3.5.1.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
   <script src="p5/p5.min.js"></script>
   <script src="p5/cell.js"></script>
   <script src= "p5/queue.js"></script>
@@ -25,10 +29,69 @@
 </head>
 
 <body>
+ 
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <span class="navbar-brand">Pathfinding and Maze generation</span>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="navbar-item  mr-auto">
+            <button class="btn nav-item" type="button" onclick="startStop()">Start/Stop</button>
+            
+          </li>
+          <li class="navbar-item mr-auto">
+            <button class="btn nav-item " type="button" onclick="refreshMaze()">Regenerate Maze</button>
+            
+          </li>
+          <li class="navbar-item mr-auto">
+            <button class="btn nav-item " type="button" onclick ="showTheSolution()">Change Visibility of Solution</button>
+          </li>
+          <li class="navbar-item mr-auto">
+            <button class="btn nav-item " type="button" onclick="directShow()">Just Show Me Solution</button>
+            
+          </li>
+          <li class="navbar-item mr-auto">
+            <select class="btn nav-item   form-control-sm" onchange="mySelectEvent()" name = "size" id="mazeSize">
+              <option  value = "smallSize">Small Maze</option>
+              <option  value = "mediumSize" selected>Medium Maze</option>
+              <option  value = "largeSize">Large Maze</option>
+            </select>
+          </li>
+
+          
+
+        </ul>
+        
+      </div>
+      
+    </nav>
+
+    <!--<div class="row information-div">
+      <div class="col-md-6">
+        <span>
+          <div class="square" style="background-color: blue;"></div>
+          <p>Start Point</p>
+        </span>
+        
+        <span>
+          <div class="square" style="background-color: green;"></div>
+          <p>End of Path</p>
+        </span>
+      </div>
+      <div class="col-md-6">
+        <div class="square" style="background-color: red;"></div>
+        <span class="text-center">End Point</span>
+      </div>
+
+    </div>-->
+  
+
   <main>
+   
   </main>
   <!--<span id ="my_timer">00:00:00</span>--> 
- 
 </body>
 
 </html>
