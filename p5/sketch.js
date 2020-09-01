@@ -6,6 +6,8 @@ var canvasx = window.screen.width;
 var canvasy = 2*canvasx/5;
 var size;
 
+
+
 function myFunction(x) {
   if (x.matches) { // If media query matches
     size = 10;
@@ -60,14 +62,16 @@ function setup() {
 
   mazeController();
   pathFindingController();
+  /*var latency = millis();
 
+ 
+  var end = millis();
+  let elapsed = end-start;
+  console.log("this took: "+elapsed+"ms");*/
 }
 
 function draw() {
-  for(var i =0;i<grid.length;i++){
-    grid[i].show();
-  }
-
+  
   if(solution && start && !directShowBool){
     if(wayIndex < currentWay.size())
     wayIndex++;

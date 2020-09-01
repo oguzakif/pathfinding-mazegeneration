@@ -3,6 +3,9 @@ function mazeController(){
   {
   generateMaze();
   }
+  for(var i =0;i<grid.length;i++){
+    grid[i].show();
+  }
 }
 
 function generateMaze(){
