@@ -7,7 +7,6 @@ var second=0;
 
 function mySelectEvent(){
     var item = document.getElementById("mazeSize").value;
-    console.log(document.getElementById("mazeSize").value);
     if(item === "smallSize")
     {
         if(canvasx > 700)

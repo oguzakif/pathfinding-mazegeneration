@@ -9,7 +9,7 @@ var size;
 function myFunction(x) {
   if (x.matches) { // If media query matches
     size = 10;
-    
+    canvasy = 3*canvasx/5;
   } else {
     size = 20;
   }
@@ -36,11 +36,8 @@ var isPathAvailable = true;
 var treaths =0;
 var wayIndex=0;
 
-function preload(){
-  
-}
 function setup() {
-  p5.disableFriendlyErrors = true;
+  p5.disableFriendlyErrors = true
   createCanvas(canvasx,canvasy);
 
   cols = floor(width/size);
