@@ -80,7 +80,7 @@ function draw() {
     currentWay.showDirectly();
   }
   else if(!solution)
-  deleteToIndex(0,wayIndex);
+  deleteToIndex(0,currentWay.size());
   //startTimer();
 
   
