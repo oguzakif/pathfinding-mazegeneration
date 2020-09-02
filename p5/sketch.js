@@ -2,7 +2,7 @@
 //by Oğuz Akif Tüfekcioğlu
 //aka sonofrifleman
 
-var canvasx = window.screen.width;
+var canvasx = getWidth();
 var canvasy = 2*canvasx/5;
 var size;
 
@@ -11,7 +11,7 @@ var size;
 function myFunction(x) {
   if (x.matches) { // If media query matches
     size = 10;
-    canvasy = 3*canvasx/5;
+    canvasy = 4*canvasx/5;
   } else {
     size = 20;
   }
@@ -62,12 +62,7 @@ function setup() {
 
   mazeController();
   pathFindingController();
-  /*var latency = millis();
-
- 
-  var end = millis();
-  let elapsed = end-start;
-  console.log("this took: "+elapsed+"ms");*/
+  
 }
 
 function draw() {
@@ -84,6 +79,8 @@ function draw() {
   else if(solution && directShowBool){
     currentWay.showDirectly();
   }
+  else if(!solution)
+  deleteToIndex(0);
   //startTimer();
 
   

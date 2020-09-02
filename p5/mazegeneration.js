@@ -30,6 +30,7 @@ function generateMaze(){
           current = stack.pop();
         }
         isMazeDone = checkMazeDone();
+       
       }
 }
 function removeWalls(a,b){

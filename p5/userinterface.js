@@ -34,20 +34,43 @@ function mySelectEvent(){
 }
 function startStop(){
     start = !start;
+    /*if(start)
+    deleteToWayIndex();*/
 }
 function showTheSolution(){
     solution = !solution;
 }
 function directShow(){
     directShowBool = !directShowBool;
+    if(!directShowBool)
+    deleteToIndex(wayIndex);
+
 }
 function refreshMaze(){
-    setToInitial();
+    var latency = millis();  
+    
 
+    setToInitial();
     mazeController();
 
     pathFindingController();
+    var end = millis();
+    let elapsed = end-latency;
+    console.log("this took: "+elapsed+"ms");
 }
+function getWidth() {
+    if (self.innerWidth) {
+      return self.innerWidth;
+    }
+  
+    if (document.documentElement && document.documentElement.clientWidth) {
+      return document.documentElement.clientWidth;
+    }
+  
+    if (document.body) {
+      return document.body.clientWidth;
+    }
+  }
 function setToInitial(){
     cols = floor(width/size);
     rows = floor(height/size);
@@ -61,7 +84,6 @@ function setToInitial(){
     isMazeDone = false;
     pathDone = false;
     isPathAvailable = true;
-    treaths =0;
     wayIndex =0;
     currentWay.elements = [];
     current = grid[0];
@@ -74,4 +96,9 @@ function setToInitial(){
     start = false;
     directShowBool = false;
 }
-
+function deleteToIndex(index){
+    let len = currentWay.size();
+    for(var i =index;i<len;i++){
+        currentWay.elements[i].show();
+    }
+}

@@ -1,6 +1,8 @@
 function Cell(i, j){
     this.i = i;
     this.j = j;
+    this.x = i*size;
+    this.y = j*size;
     this.f = 0;
     this.g = 0;
     this.h = 0;
@@ -38,8 +40,6 @@ function Cell(i, j){
       stroke(23,29,75,300);
       if(this.walls[0])
         line(x,y,x+size,y);
-      
-      
   
       if(this.walls[1])
         line(x+size,y,x+size,y+size);
@@ -51,10 +51,7 @@ function Cell(i, j){
         line(x,y+size,x,y);
   
       if(this.visited){
-        noStroke();
-        fill(242,241,211,300);
-
-        rect(x,y,size,size);
+        this.showVisited();
       }
       if(this.finish) {
         noStroke();
@@ -67,7 +64,11 @@ function Cell(i, j){
         rect(x,y,size,size);
       }
     }
-  
+    this.showVisited = function(){
+      noStroke();
+      fill(242,241,211,300);
+      rect(this.x,this.y,size,size);
+    }
     this.checkNeighbors = function(){
       var neighbors = [];
   
