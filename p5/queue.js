@@ -34,7 +34,7 @@ function Queue() {
             for(var i=0;i<lastPoint;i++){
                 x = this.elements[i].i*size;
                 y = this.elements[i].j*size;
-                stroke(0);
+                stroke(23,29,75,300);
                 if(this.elements[i].walls[0])
                 line(x,y,x+size,y);
             

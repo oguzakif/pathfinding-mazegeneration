@@ -51,7 +51,9 @@ function Cell(i, j){
         line(x,y+size,x,y);
   
       if(this.visited){
-        this.showVisited();
+        noStroke();
+        fill(242,241,211,300);
+        rect(x,y,size,size);
       }
       if(this.finish) {
         noStroke();
@@ -63,11 +65,6 @@ function Cell(i, j){
         fill(0,0,255,300);
         rect(x,y,size,size);
       }
-    }
-    this.showVisited = function(){
-      noStroke();
-      fill(242,241,211,300);
-      rect(this.x,this.y,size,size);
     }
     this.checkNeighbors = function(){
       var neighbors = [];

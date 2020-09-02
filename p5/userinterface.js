@@ -43,7 +43,7 @@ function showTheSolution(){
 function directShow(){
     directShowBool = !directShowBool;
     if(!directShowBool)
-    deleteToIndex(wayIndex);
+    deleteToIndex(wayIndex, currentWay.size());
 
 }
 function refreshMaze(){
@@ -96,8 +96,7 @@ function setToInitial(){
     start = false;
     directShowBool = false;
 }
-function deleteToIndex(index){
-    let len = currentWay.size();
+function deleteToIndex(index, len){
     for(var i =index;i<len;i++){
         currentWay.elements[i].show();
     }
