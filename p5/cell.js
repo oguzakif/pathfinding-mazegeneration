@@ -3,11 +3,9 @@ function Cell(i, j){
     this.j = j;
     this.x = i*size;
     this.y = j*size;
-    this.f = 0;
-    this.g = 0;
-    this.h = 0;
-    this.walls = [true,true,true,true]; //top,right,bottom,left
-    this.visited = false;
+    this.maze = false;
+    this.wall = true;
+    this.frontier = false;
     this.wayVisited = false;
     this.finish = false;
     this.start = false;
@@ -37,22 +35,19 @@ function Cell(i, j){
     this.show = function(){
       var x = this.i*size;
       var y = this.j*size;
-      stroke(23,29,75,300);
-      if(this.walls[0])
-        line(x,y,x+size,y);
-  
-      if(this.walls[1])
-        line(x+size,y,x+size,y+size);
-  
-      if(this.walls[2])
-        line(x+size,y+size,x,y+size);
-  
-      if(this.walls[3])
-        line(x,y+size,x,y);
-  
-      if(this.visited){
+      if(this.maze){
         noStroke();
         fill(242,241,211,300);
+        rect(x,y,size,size);
+      }
+      if(this.wall){
+        noStroke();
+        fill(0,0,0,300);
+        rect(x,y,size,size);
+      }
+      if(this.frontier){
+        noStroke();
+        fill(0,255,0,300);
         rect(x,y,size,size);
       }
       if(this.finish) {
@@ -66,66 +61,68 @@ function Cell(i, j){
         rect(x,y,size,size);
       }
     }
-    this.checkNeighbors = function(){
-      var neighbors = [];
+    this.markAsFrontier = function(){
   
-      var top     = grid[index(i ,j-1)];
-      var right   = grid[index(i+1 ,j)];
-      var bottom  = grid[index(i ,j+1)];
-      var left    = grid[index(i-1 ,j)];
+      var top     = grid[index(i ,j-2)];
+      var right   = grid[index(i+2 ,j)];
+      var bottom  = grid[index(i ,j+2)];
+      var left    = grid[index(i-2 ,j)];
   
-      if(top && !top.visited){
-        neighbors.push(top);
+      if(top &&  !top.maze && !top.frontier && top.wall){
+        top.frontier = true;
+        frontierNodes.push(top);
       }
-      if(right && !right.visited){
-        neighbors.push(right);
+      if(right &&  !right.maze && !right.frontier && right.wall){
+        right.frontier = true;
+        frontierNodes.push(right);
       }
-      if(bottom && !bottom.visited){
-        neighbors.push(bottom);
+      if( bottom &&  !bottom.maze && !bottom.frontier && bottom.wall){
+        bottom.frontier = true;
+        frontierNodes.push(bottom);
       }
-      if(left && !left.visited){
-        neighbors.push(left);
+      if(left &&  !left.maze && !left.frontier && left.wall){
+        left.frontier = true;
+        frontierNodes.push(left);
       }
   
-      if(neighbors.length > 0){
-        var r = floor(random(0,neighbors.length));
-        return neighbors[r];
+      
+    }
+    this.randomFrontier = function(){
+      if(frontierNodes.length > 0){
+        var r = floor(random(0,frontierNodes.length));
+      
+        return frontierNodes[r];
       }
       else{
         return undefined;
       }
     }
-    
-    this.isTopNeighborVisited = function(){
-      var top     = grid[index(i ,j-1)];
-      
-      if(top.isVisited)
-      return true;
-      else 
-      return false;
-    }
-    this.isRightNeighborVisited = function(){
-      var right   = grid[index(i+1 ,j)];
-      if(right.isVisited)
-      return true;
-      else 
-      return false;
-    }
-    this.isBottomNeighborVisited = function(){
-      var bottom  = grid[index(i ,j+1)];
+    this.randomMazeNode = function(){
+      var top     = grid[index(i ,j-2)];
+      var right   = grid[index(i+2 ,j)];
+      var bottom  = grid[index(i ,j+2)];
+      var left    = grid[index(i-2 ,j)];
 
-      if(bottom.isVisited)
-      return true;
-      else 
-      return false;
-    }
-    this.isLeftNeighborVisited = function(){
-      var left    = grid[index(i-1 ,j)];
+      var mazeNodes = [];
 
-      if(left.isVisited)
-      return true;
-      else 
-      return false;
+      if(top && top.maze){
+        mazeNodes.push(grid[index(i,j-1)]);        
+      }
+      else if(right && right.maze){
+        mazeNodes.push(grid[index(i+1,j)]);
+      }
+      else if(bottom&& bottom.maze){
+        mazeNodes.push(grid[index(i,j+1)]);
+      }
+      else if(left && left.maze){
+        mazeNodes.push(grid[index(i-1,j)]);
+      }
+
+      if(mazeNodes.length > 0){
+        var r = floor(random(0,mazeNodes.length));
+
+        mazeNodes[r].wall = false;
+        mazeNodes[r].maze = true;
+      }
     }
-  
   }

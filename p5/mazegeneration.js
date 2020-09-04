@@ -1,55 +1,37 @@
 function mazeController(){
   while(!isMazeDone)
-  {
-  generateMaze();
-  }
-  for(var i =0;i<grid.length;i++){
-    grid[i].show();
-  }
+  generateMaze()
+  
 }
 
 function generateMaze(){
-      if(!isMazeDone){
-        current.visited = true;
-        current.highlight();
-          //STEP 1 
-        var next = current.checkNeighbors();
-        if(next){
-          next.visited = true;
-          
-          //STEP 2 
-          stack.push(current);
-    
-          //STEP 3
-          removeWalls(current ,next);
-          
-          //STEP 4
-          current = next;
-        }
-        else if(stack.length > 0){
-          current = stack.pop();
-        }
-        isMazeDone = checkMazeDone();
-       
-      }
+    if(!isMazeDone)
+    {
+      current.maze = true;
+      current.wall = false;
+      current.highlight();
+      
+      //STEP 1 FIND FRONTIERS
+      current.markAsFrontier();
+
+      //STEP 2 SPECIFY NEW CURRENT 
+      current = current.randomFrontier();
+
+      //STEP 3 REMOVE CURRENT FROM FRONTIERNODES LIST
+      frontierNodes = removeFromList(frontierNodes, current);
+      current.frontier = false;
+
+      //STEP 4 CONNECT TO RANDOM MAZE NODE
+      current.randomMazeNode();
+     
+      if(!(frontierNodes.length > 0))
+      isMazeDone = true;
+    }
 }
-function removeWalls(a,b){
-    var x = a.i - b.i;
-    if(x === 1){
-      a.walls[3] = false;
-      b.walls[1] = false;
-    }
-    else if(x === -1){
-      a.walls[1] = false;
-      b.walls[3] = false;
-    }
-    var y = a.j - b.j;
-    if(y === 1){
-      a.walls[0] = false;
-      b.walls[2] = false;
-    }
-    else if(y === -1){
-      a.walls[2] = false;
-      b.walls[0] = false;
-    }
+  function removeFromList(list,obj){
+    var index = list.indexOf(obj);
+    if(index > -1)
+    list.splice(index,1);
+
+    return list;
   }

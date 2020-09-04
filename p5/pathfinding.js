@@ -10,7 +10,6 @@ function pathFinding(){
     //STEP 1
     isPathAvailable = tracePath();
   
-
       //STEP 2
     if(!isPathAvailable)
     backToCrossNode();
@@ -26,11 +25,16 @@ function tracePath(){
     var flag;
     var traceNode;
     var wallCounter = 0;
+
+
+    var right   = grid[index(currentWay.lastPeek().i+1 ,currentWay.lastPeek().j)];
+    var bottom  = grid[index(currentWay.lastPeek().i ,currentWay.lastPeek().j+1)];
+    var top     = grid[index(currentWay.lastPeek().i ,currentWay.lastPeek().j-1)];
+    var left    = grid[index(currentWay.lastPeek().i-1 ,currentWay.lastPeek().j)];
     
     
-    if(!currentWay.lastPeek().walls[1] && currentWay.lastPeek().i < cols-1){
+    if(right && !right.wall && currentWay.lastPeek().i < cols-1){
       wallCounter++;
-      var right   = grid[index(currentWay.lastPeek().i+1 ,currentWay.lastPeek().j)];
   
       if(!right.wayVisited){
         counter++;
@@ -40,10 +44,9 @@ function tracePath(){
       
     }
   
-    if(!currentWay.lastPeek().walls[2] && currentWay.lastPeek().j < rows -1) {
+    if(bottom && !bottom.wall && currentWay.lastPeek().j < rows -1) {
       wallCounter++;
   
-      var bottom  = grid[index(currentWay.lastPeek().i ,currentWay.lastPeek().j+1)];
   
       if(!bottom.wayVisited){
         counter++;
@@ -55,9 +58,8 @@ function tracePath(){
 
     
 
-    if(!currentWay.lastPeek().walls[0] && currentWay.lastPeek().j > 0) {
+    if(top && !top.wall && currentWay.lastPeek().j > 0) {
       wallCounter++;
-      var top     = grid[index(currentWay.lastPeek().i ,currentWay.lastPeek().j-1)];
       if(!top.wayVisited){
         counter++;
         if(!(counter > 1))
@@ -68,10 +70,9 @@ function tracePath(){
    
     
     
-    if(!currentWay.lastPeek().walls[3] && currentWay.lastPeek().i > 0) {
+    if(left && !left.wall && currentWay.lastPeek().i > 0) {
       wallCounter++;
   
-      var left    = grid[index(currentWay.lastPeek().i-1 ,currentWay.lastPeek().j)];
   
       if(!left.wayVisited){
         counter++;
@@ -112,15 +113,4 @@ function tracePath(){
   }
   function isPathDone(){
     return currentWay.lastPeek() == finishNode;
-  }
-  function checkMazeDone(){
-    var counter =0;
-    for(var i =0;i<grid.length;i++){
-      if(grid[i].visited)
-      counter++;
-    }
-    if(counter === grid.length)
-    return true;
-    else 
-    return false;
   }

@@ -53,7 +53,7 @@ function refreshMaze(){
     setToInitial();
     mazeController();
 
-    pathFindingController();
+    //pathFindingController();
     var end = millis();
     let elapsed = end-latency;
     console.log("this took: "+elapsed+"ms");
@@ -86,13 +86,13 @@ function setToInitial(){
     isPathAvailable = true;
     wayIndex =0;
     currentWay.elements = [];
+    frontierNodes = [];
     current = grid[0];
     grid[0].start = true;
-    startNode = grid[0];
-    currentWay.enqueue(startNode);
+    currentWay.enqueue(grid[0]);
     currentWay.lastPeek().wayVisited =true;
-    grid[grid.length-1].finish = true;
-    finishNode = grid[grid.length-1];
+    grid[index(cols-2,rows-2)].finish = true;
+    finishNode =  grid[index(cols-2,rows-2)];
     start = false;
     directShowBool = false;
 }

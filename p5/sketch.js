@@ -2,17 +2,19 @@
 //by Oğuz Akif Tüfekcioğlu
 //aka sonofrifleman
 
-var canvasx = getWidth();
-var canvasy = 2*canvasx/5;
+var canvasx;
+var canvasy;
 var size;
-
-
 
 function myFunction(x) {
   if (x.matches) { // If media query matches
     size = 10;
+    canvasx = 500;
     canvasy = 4*canvasx/5;
   } else {
+    canvasx = 1280;
+    canvasy = 640;
+
     size = 20;
   }
 }
@@ -24,6 +26,7 @@ myFunction(x) // Call listener function at run time
 var cols;
 var rows;
 var grid = [];
+var frontierNodes = [];
 var current;
 
 var stack = [];
@@ -31,9 +34,8 @@ var stack = [];
 var currentWay = new Queue();
 var isMazeDone = false;
 var crossNodes = [];
-var startNode;
-var finishNode;
 var pathDone = false;
+var finishNode;
 var isPathAvailable = true;
 var treaths =0;
 var wayIndex=0;
@@ -45,33 +47,38 @@ function setup() {
   cols = floor(width/size);
   rows = floor(height/size);
   frameRate(120);
-  pixelDensity(5);
   for(var j =0; j < rows;j++){
     for(var i =0;i<cols;i++){
       var cell = new Cell(i,j);
       grid.push(cell);
     }
   }
+  //var r = floor(random(0,grid.length));
+
   current = grid[0];
   grid[0].start = true;
-  startNode = grid[0];
-  currentWay.enqueue(startNode);
+  currentWay.enqueue(grid[0]);
   currentWay.lastPeek().wayVisited =true;
-  grid[grid.length-1].finish = true;
-  finishNode = grid[grid.length-1];
-
-  mazeController();
-  pathFindingController();
+  grid[index(cols-2,rows-2)].finish = true;
+  finishNode =  grid[index(cols-2,rows-2)];
+  //mazeController();
+  //pathFindingController();
+  
   
 }
 
 function draw() {
-  
+  for(var i =0;i<grid.length;i++){
+    grid[i].show();
+  }
+  generateMaze();
   if(solution && start && !directShowBool){
-    if(wayIndex < currentWay.size())
+    /*if(wayIndex < currentWay.size())
     wayIndex++;
 
-    currentWay.showLine(wayIndex);
+    currentWay.showLine(wayIndex);*/
+    pathFinding();
+    currentWay.show();
   }
   else if(solution && !start && !directShowBool){
     currentWay.showLine(wayIndex);
@@ -80,7 +87,7 @@ function draw() {
     currentWay.showDirectly();
   }
   else if(!solution)
-  deleteToIndex(0,currentWay.size());
+  deleteToIndex(0,wayIndex);
   //startTimer();
 
   

@@ -29,24 +29,8 @@ function Queue() {
     }
 
     this.showLine = function(lastPoint){
-        var x;
-        var y;
+     
             for(var i=0;i<lastPoint;i++){
-                x = this.elements[i].i*size;
-                y = this.elements[i].j*size;
-                stroke(23,29,75,300);
-                if(this.elements[i].walls[0])
-                line(x,y,x+size,y);
-            
-                if(this.elements[i].walls[1])
-                line(x+size,y,x+size,y+size);
-            
-                if(this.elements[i].walls[2])
-                line(x+size,y+size,x,y+size);
-            
-                if(this.elements[i].walls[3])
-                line(x,y+size,x,y);
-
                 if(i === 0)
                 this.elements[i].highlightStart();
 
@@ -58,24 +42,9 @@ function Queue() {
             }
     }
     this.showDirectly = function(){
-        var x;
-        var y;
+     
             for(var i=0;i<this.size();i++){
-                x = this.elements[i].i*size;
-                y = this.elements[i].j*size;
-                stroke(23,29,75,300);
-                if(this.elements[i].walls[0])
-                line(x,y,x+size,y);
-            
-                if(this.elements[i].walls[1])
-                line(x+size,y,x+size,y+size);
-            
-                if(this.elements[i].walls[2])
-                line(x+size,y+size,x,y+size);
-            
-                if(this.elements[i].walls[3])
-                line(x,y+size,x,y);
-
+               
                 if(i === 0)
                 this.elements[i].highlightStart();
 
@@ -85,5 +54,18 @@ function Queue() {
                 else
                 this.elements[i].highlight();
             }
+    }
+    this.show = function (){
+        
+        for(var i=0;i<this.size();i++){
+            if(i === 0)
+            this.elements[i].highlightStart();
+
+            else if(i === this.size()-1)
+            this.elements[i].highlightFinish();
+
+            else
+            this.elements[i].highlight();
+        }
     }
 }
