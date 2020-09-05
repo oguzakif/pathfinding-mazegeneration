@@ -11,31 +11,25 @@ function pathFinding(){
     isPathAvailable = tracePath();
   
       //STEP 2
-    if(!isPathAvailable)
-    backToCrossNode();
+    if(!isPathAvailable && crossNodes.length > 0){
+      backToCrossNode();
+    }
 
     //CHECKING PATH IS DONE
     pathDone = isPathDone();
     
   }
+  finishNode.wall = false;
 }
 
 function tracePath(){
     var counter = 0;
     var flag;
     var traceNode;
-    var wallCounter = 0;
-
-
+    
+    if(grid[index(currentWay.lastPeek().i+1 ,currentWay.lastPeek().j)] && !grid[index(currentWay.lastPeek().i+1 ,currentWay.lastPeek().j)].wall){
     var right   = grid[index(currentWay.lastPeek().i+1 ,currentWay.lastPeek().j)];
-    var bottom  = grid[index(currentWay.lastPeek().i ,currentWay.lastPeek().j+1)];
-    var top     = grid[index(currentWay.lastPeek().i ,currentWay.lastPeek().j-1)];
-    var left    = grid[index(currentWay.lastPeek().i-1 ,currentWay.lastPeek().j)];
-    
-    
-    if(right && !right.wall && currentWay.lastPeek().i < cols-1){
-      wallCounter++;
-  
+
       if(!right.wayVisited){
         counter++;
         if(!(counter > 1))
@@ -44,10 +38,9 @@ function tracePath(){
       
     }
   
-    if(bottom && !bottom.wall && currentWay.lastPeek().j < rows -1) {
-      wallCounter++;
-  
-  
+    if(grid[index(currentWay.lastPeek().i ,currentWay.lastPeek().j+1)] && !grid[index(currentWay.lastPeek().i ,currentWay.lastPeek().j+1)].wall) {
+    var bottom  = grid[index(currentWay.lastPeek().i ,currentWay.lastPeek().j+1)];
+
       if(!bottom.wayVisited){
         counter++;
         if(!(counter > 1))
@@ -56,24 +49,19 @@ function tracePath(){
       
     }
 
-    
+    if( grid[index(currentWay.lastPeek().i ,currentWay.lastPeek().j-1)] && !grid[index(currentWay.lastPeek().i ,currentWay.lastPeek().j-1)].wall) {
+    var top     = grid[index(currentWay.lastPeek().i ,currentWay.lastPeek().j-1)];
 
-    if(top && !top.wall && currentWay.lastPeek().j > 0) {
-      wallCounter++;
       if(!top.wayVisited){
         counter++;
         if(!(counter > 1))
         traceNode = top;
       }
-      
     }
    
-    
-    
-    if(left && !left.wall && currentWay.lastPeek().i > 0) {
-      wallCounter++;
-  
-  
+    if( grid[index(currentWay.lastPeek().i-1 ,currentWay.lastPeek().j)] && !grid[index(currentWay.lastPeek().i-1 ,currentWay.lastPeek().j)].wall) {
+    var left    = grid[index(currentWay.lastPeek().i-1 ,currentWay.lastPeek().j)];
+
       if(!left.wayVisited){
         counter++;
         if(!(counter > 1))
@@ -100,16 +88,52 @@ function tracePath(){
   }
   
   function backToCrossNode(){
-    var counter =0;
-    var crossNode = crossNodes.pop();
-  
+    var crossNode = checkCrossNodeIsDone();
+    console.log(crossNode);
       for(var i =0; i<currentWay.size();i++){
         if(currentWay.lastPeek() != crossNode)
           {
             currentWay.lastDequeue();
-            counter++;
           }
       }
+  }
+  function checkCrossNodeIsDone(){
+    var counter =0;
+    var right   = grid[index(crossNodes[crossNodes.length-1].i+1 ,crossNodes[crossNodes.length-1].j)];
+    var bottom  = grid[index(crossNodes[crossNodes.length-1].i ,crossNodes[crossNodes.length-1].j+1)];
+    var top     = grid[index(crossNodes[crossNodes.length-1].i ,crossNodes[crossNodes.length-1].j-1)];
+    var left    = grid[index(crossNodes[crossNodes.length-1].i-1 ,crossNodes[crossNodes.length-1].j)];
+    
+    
+    if(right && !right.wall){
+      if(!right.wayVisited){
+        counter++;
+      }
+    }
+  
+    if(bottom && !bottom.wall) {
+      if(!bottom.wayVisited){
+        counter++;
+      }
+    }
+
+    if(top && !top.wall ) {
+      if(!top.wayVisited){
+        counter++;
+      }
+    }
+    
+    if(left && !left.wall) {
+      if(!left.wayVisited){
+        counter++;
+      }
+    }
+
+    if(counter ===3) console.log("4 way");
+    if(counter>2) return crossNodes[crossNodes.length-1];
+    else if(grid[crossNodes.length-1] === grid[0]) return crossNodes[crossNodes.length-1];
+    else return crossNodes.pop();
+
   }
   function isPathDone(){
     return currentWay.lastPeek() == finishNode;

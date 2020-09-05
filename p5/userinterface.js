@@ -47,16 +47,13 @@ function directShow(){
 
 }
 function refreshMaze(){
-    var latency = millis();  
     
 
     setToInitial();
     mazeController();
 
     //pathFindingController();
-    var end = millis();
-    let elapsed = end-latency;
-    console.log("this took: "+elapsed+"ms");
+    
 }
 function getWidth() {
     if (self.innerWidth) {

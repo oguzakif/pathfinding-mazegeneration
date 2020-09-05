@@ -24,8 +24,10 @@ function generateMaze(){
       //STEP 4 CONNECT TO RANDOM MAZE NODE
       current.randomMazeNode();
      
-      if(!(frontierNodes.length > 0))
-      isMazeDone = true;
+      if(!(frontierNodes.length > 0)){
+        isMazeDone = true;
+        
+      }
     }
 }
   function removeFromList(list,obj){

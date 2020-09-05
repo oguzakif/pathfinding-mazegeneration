@@ -61,7 +61,7 @@ function setup() {
   currentWay.lastPeek().wayVisited =true;
   grid[index(cols-2,rows-2)].finish = true;
   finishNode =  grid[index(cols-2,rows-2)];
-  //mazeController();
+  mazeController();
   //pathFindingController();
   
   
@@ -71,24 +71,24 @@ function draw() {
   for(var i =0;i<grid.length;i++){
     grid[i].show();
   }
-  generateMaze();
+ // generateMaze();
   if(solution && start && !directShowBool){
     /*if(wayIndex < currentWay.size())
     wayIndex++;
 
     currentWay.showLine(wayIndex);*/
     pathFinding();
-    currentWay.show();
   }
-  else if(solution && !start && !directShowBool){
+ /* else if(solution && !start && !directShowBool){
     currentWay.showLine(wayIndex);
   }
   else if(solution && directShowBool){
     currentWay.showDirectly();
-  }
+  }*/
   else if(!solution)
   deleteToIndex(0,wayIndex);
   //startTimer();
+  currentWay.show();
 
   
 }
