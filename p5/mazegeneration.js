@@ -26,7 +26,7 @@ function generateMaze(){
      
       if(!(frontierNodes.length > 0)){
         isMazeDone = true;
-        
+        checkEndPoint();
       }
     }
 }
@@ -36,4 +36,17 @@ function generateMaze(){
     list.splice(index,1);
 
     return list;
+  }
+  function checkEndPoint(){
+    var randomArr = [];
+
+    if(grid[index(finishNode.i,finishNode.j-2)].maze)
+    randomArr.push(grid[index(finishNode.i,finishNode.j-1)]);
+    if(grid[index(finishNode.i-2,finishNode.j)].maze)
+    randomArr.push(grid[index(finishNode.i-1,finishNode.j)]);
+
+    var r = floor(random(0,randomArr.length));
+
+    randomArr[r].wall = false;
+
   }

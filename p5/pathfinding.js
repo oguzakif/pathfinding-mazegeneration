@@ -18,6 +18,10 @@ function pathFinding(){
     //CHECKING PATH IS DONE
     pathDone = isPathDone();
     
+    if(!pathDone && currentWay.length === 0) {
+      pathDone = true;
+      console.log("Sorry the path couldn't found.");
+    }
   }
   finishNode.wall = false;
 }
@@ -27,8 +31,14 @@ function tracePath(){
     var flag;
     var traceNode;
     
-    if(grid[index(currentWay.lastPeek().i+1 ,currentWay.lastPeek().j)] && !grid[index(currentWay.lastPeek().i+1 ,currentWay.lastPeek().j)].wall){
+    console.log("currentWay.lastPeek(): ");
+    console.log(currentWay.lastPeek());
     var right   = grid[index(currentWay.lastPeek().i+1 ,currentWay.lastPeek().j)];
+    var bottom  = grid[index(currentWay.lastPeek().i ,currentWay.lastPeek().j+1)];
+    var top     = grid[index(currentWay.lastPeek().i ,currentWay.lastPeek().j-1)];
+    var left    = grid[index(currentWay.lastPeek().i-1 ,currentWay.lastPeek().j)];
+
+    if(right && !right.wall){
 
       if(!right.wayVisited){
         counter++;
@@ -38,8 +48,7 @@ function tracePath(){
       
     }
   
-    if(grid[index(currentWay.lastPeek().i ,currentWay.lastPeek().j+1)] && !grid[index(currentWay.lastPeek().i ,currentWay.lastPeek().j+1)].wall) {
-    var bottom  = grid[index(currentWay.lastPeek().i ,currentWay.lastPeek().j+1)];
+    if(bottom && !bottom.wall) {
 
       if(!bottom.wayVisited){
         counter++;
@@ -49,8 +58,7 @@ function tracePath(){
       
     }
 
-    if( grid[index(currentWay.lastPeek().i ,currentWay.lastPeek().j-1)] && !grid[index(currentWay.lastPeek().i ,currentWay.lastPeek().j-1)].wall) {
-    var top     = grid[index(currentWay.lastPeek().i ,currentWay.lastPeek().j-1)];
+    if(top && !top.wall) {
 
       if(!top.wayVisited){
         counter++;
@@ -59,8 +67,7 @@ function tracePath(){
       }
     }
    
-    if( grid[index(currentWay.lastPeek().i-1 ,currentWay.lastPeek().j)] && !grid[index(currentWay.lastPeek().i-1 ,currentWay.lastPeek().j)].wall) {
-    var left    = grid[index(currentWay.lastPeek().i-1 ,currentWay.lastPeek().j)];
+    if(left && !left.wall) {
 
       if(!left.wayVisited){
         counter++;
@@ -89,6 +96,7 @@ function tracePath(){
   
   function backToCrossNode(){
     var crossNode = checkCrossNodeIsDone();
+    console.log("CrossNode");
     console.log(crossNode);
       for(var i =0; i<currentWay.size();i++){
         if(currentWay.lastPeek() != crossNode)
@@ -131,10 +139,10 @@ function tracePath(){
 
     if(counter ===3) console.log("4 way");
     if(counter>2) return crossNodes[crossNodes.length-1];
-    else if(grid[crossNodes.length-1] === grid[0]) return crossNodes[crossNodes.length-1];
+    //else if(grid[crossNodes.length-1] === grid[0]) return crossNodes[crossNodes.length-1];
     else return crossNodes.pop();
 
   }
   function isPathDone(){
-    return currentWay.lastPeek() == finishNode;
+    return currentWay.lastPeek() === finishNode;
   }
