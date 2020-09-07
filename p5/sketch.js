@@ -4,6 +4,7 @@
 
 var canvasx;
 var canvasy;
+var canvas;
 var size;
 
 function myFunction(x) {
@@ -42,7 +43,7 @@ var wayIndex=0;
 
 function setup() {
   p5.disableFriendlyErrors = true
-  createCanvas(canvasx,canvasy);
+  canvas = createCanvas(canvasx,canvasy);
 
   cols = floor(width/size);
   rows = floor(height/size);

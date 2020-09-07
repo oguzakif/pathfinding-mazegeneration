@@ -7,30 +7,44 @@ var second=0;
 
 function mySelectEvent(){
     var item = document.getElementById("mazeSize").value;
+
     if(item === "smallSize")
     {
-        if(canvasx > 700)
-        size = 40;
+        if(canvasx > 700){
+            size = 40;
+            canvas.style('border-left: 40px solid black; border-top: 40px solid black');
+        }
 
-        else
-        size = 20;
+        else{
+            canvas.style('border-left: 20px solid black; border-top: 20px solid black');
+            size = 20;
+        }
     }
     else if(item === "mediumSize")
     {
-        if(canvasx > 700)
-        size =20;
+        if(canvasx > 700){
+            
+            size =20;
+            canvas.style('border-left: 20px solid black; border-top: 20px solid black');
+        }
 
-        else 
-        size =10;
+        else {
+            canvas.style('border-left: 10px solid black; border-top: 10px solid black');
+            size =10;
+        }
     }
     else if(item === "largeSize"){
-        if(canvasx > 700)
-        size = 10;
+        if(canvasx > 700){
+            size = 10;
+            canvas.style('border-left: 10px solid black; border-top: 10px solid black');
+        }
 
-        else
-        size = 5;
+        else{
+            canvas.style('border-left: 5px solid black; border-top: 5px solid black');
+            size = 5;
+        }
     }
-    refreshMaze();
+    setToInitial();
 }
 function startStop(){
     start = !start;
