@@ -50,7 +50,7 @@ function Cell(i, j){
         fill(0,255,0,300);
         rect(x,y,size,size);
       }
-      if(this.wayVisited){
+      if(this.wayVisited && solution){
         noStroke();
         fill(0,255,0,300);
         rect(x,y,size,size);

@@ -75,20 +75,23 @@ function draw() {
   if(solution && start && !directShowBool){
     /*if(wayIndex < currentWay.size())
     wayIndex++;
-
     currentWay.showLine(wayIndex);*/
     pathFinding();
+    currentWay.show();
   }
- /* else if(solution && !start && !directShowBool){
+  /*else if(solution && !start && !directShowBool){
     currentWay.showLine(wayIndex);
+  }*/
+  else if(solution && !start && !directShowBool){
+    currentWay.show();
   }
   else if(solution && directShowBool){
-    currentWay.showDirectly();
-  }*/
-  else if(!solution)
-  deleteToIndex(0,wayIndex);
+    pathFindingController();
+    currentWay.show();
+  }
+  /*else if(!solution)
+  deleteToIndex(0,wayIndex);*/
   //startTimer();
-  currentWay.show();
 
   
 }
