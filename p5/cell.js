@@ -52,7 +52,7 @@ function Cell(i, j){
       }
       if(this.wayVisited && solution){
         noStroke();
-        fill(0,255,0,300);
+        fill(68,214,233,300);
         rect(x,y,size,size);
       }
       if(this.finish) {
