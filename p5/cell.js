@@ -110,16 +110,16 @@ function Cell(i, j){
 
       var mazeNodes = [];
 
-      if(top && top.maze){
+      if(top && top.maze && grid[index(i,j-1)].wall){
         mazeNodes.push(grid[index(i,j-1)]);        
       }
-      else if(right && right.maze){
+      else if(right && right.maze && grid[index(i+1,j)].wall){
         mazeNodes.push(grid[index(i+1,j)]);
       }
-      else if(bottom&& bottom.maze){
+      else if(bottom&& bottom.maze && grid[index(i,j+1)]){
         mazeNodes.push(grid[index(i,j+1)]);
       }
-      else if(left && left.maze){
+      else if(left && left.maze && grid[index(i-1,j)]){
         mazeNodes.push(grid[index(i-1,j)]);
       }
 
