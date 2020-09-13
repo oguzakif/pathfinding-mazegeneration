@@ -17,7 +17,12 @@ function pathFinding(){
 
     //CHECKING PATH IS DONE
     pathDone = isPathDone();
-    
+
+    console.log("--------------------");
+    for(let i =0;i< currentWay.size();i++)
+    console.log(currentWay.elements[i]);
+
+
     if(!pathDone && currentWay.length === 0) {
       pathDone = true;
       console.log("Sorry the path couldn't found.");
@@ -31,11 +36,11 @@ function tracePath(){
     var flag;
     var traceNode;
     
-    console.log("currentWay.lastPeek(): ");
-    console.log(currentWay.lastPeek());
+    /*console.log("currentWay.lastPeek(): ");
+    console.log(currentWay.lastPeek());*/
+    var top     = grid[index(currentWay.lastPeek().i ,currentWay.lastPeek().j-1)];
     var right   = grid[index(currentWay.lastPeek().i+1 ,currentWay.lastPeek().j)];
     var bottom  = grid[index(currentWay.lastPeek().i ,currentWay.lastPeek().j+1)];
-    var top     = grid[index(currentWay.lastPeek().i ,currentWay.lastPeek().j-1)];
     var left    = grid[index(currentWay.lastPeek().i-1 ,currentWay.lastPeek().j)];
 
     if(right && !right.wall){
@@ -85,6 +90,7 @@ function tracePath(){
       if(counter > 1){
           crossNodes.push(currentWay.lastPeek());
       }
+      currentWay.lastPeek().wayVisited = true;
       traceNode.wayVisited = true;
       currentWay.enqueue(traceNode);
       flag = true;
@@ -95,9 +101,10 @@ function tracePath(){
   }
   
   function backToCrossNode(){
-    var crossNode = checkCrossNodeIsDone();
-    console.log("CrossNode");
-    console.log(crossNode);
+    //var crossNode = checkCrossNodeIsDone();
+    var crossNode = crossNodes.pop();
+    /*console.log("CrossNode");
+    console.log(crossNode);*/
       for(var i =0; i<currentWay.size();i++){
         if(currentWay.lastPeek() != crossNode)
           {
@@ -137,8 +144,8 @@ function tracePath(){
       }
     }
 
-    if(counter ===3) console.log("4 way");
-    if(counter>2) return crossNodes[crossNodes.length-1];
+    //if(counter ===3) console.log("4 way");
+    if(counter===3) return crossNodes[crossNodes.length-1];
     //else if(grid[crossNodes.length-1] === grid[0]) return crossNodes[crossNodes.length-1];
     else return crossNodes.pop();
 

@@ -63,12 +63,16 @@ function setup() {
   grid[index(cols-2,rows-2)].finish = true;
   finishNode =  grid[index(cols-2,rows-2)];
   //mazeController();
-  //pathFindingController();
+  //pathFindingController(); 
   
+  
+  //noLoop();
   
 }
 
 function draw() {
+  //setInterval(redraw, 50);
+
   for(var i =0;i<grid.length;i++){
     grid[i].show();
   }
