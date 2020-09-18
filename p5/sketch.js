@@ -40,9 +40,9 @@ var finishNode;
 var isPathAvailable = true;
 var treaths =0;
 var wayIndex=0;
+//p5.disableFriendlyErrors = true;
 
 function setup() {
-  p5.disableFriendlyErrors = true
   canvas = createCanvas(canvasx,canvasy);
 
   cols = floor(width/size);
@@ -54,7 +54,6 @@ function setup() {
       grid.push(cell);
     }
   }
-  //var r = floor(random(0,grid.length));
 
   current = grid[0];
   grid[0].start = true;
@@ -73,9 +72,12 @@ function setup() {
 function draw() {
   //setInterval(redraw, 50);
 
-  for(var i =0;i<grid.length;i++){
-    grid[i].show();
+  if(!pathDone){
+    for(var i =0;i<grid.length;i++){
+      grid[i].show();
+    }
   }
+
   generateMaze();
   if(solution && start && !directShowBool){
     /*if(wayIndex < currentWay.size())

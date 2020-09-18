@@ -18,11 +18,6 @@ function pathFinding(){
     //CHECKING PATH IS DONE
     pathDone = isPathDone();
 
-    console.log("--------------------");
-    for(let i =0;i< currentWay.size();i++)
-    console.log(currentWay.elements[i]);
-
-
     if(!pathDone && currentWay.length === 0) {
       pathDone = true;
       console.log("Sorry the path couldn't found.");
@@ -36,14 +31,9 @@ function tracePath(){
     var flag;
     var traceNode;
     
-    /*console.log("currentWay.lastPeek(): ");
-    console.log(currentWay.lastPeek());*/
-    var top     = grid[index(currentWay.lastPeek().i ,currentWay.lastPeek().j-1)];
-    var right   = grid[index(currentWay.lastPeek().i+1 ,currentWay.lastPeek().j)];
-    var bottom  = grid[index(currentWay.lastPeek().i ,currentWay.lastPeek().j+1)];
-    var left    = grid[index(currentWay.lastPeek().i-1 ,currentWay.lastPeek().j)];
 
-    if(right && !right.wall){
+    if(!currentWay.lastPeek().walls[1]){
+      var right   = grid[index(currentWay.lastPeek().i+1 ,currentWay.lastPeek().j)];
 
       if(!right.wayVisited){
         counter++;
@@ -53,7 +43,8 @@ function tracePath(){
       
     }
   
-    if(bottom && !bottom.wall) {
+    if(!currentWay.lastPeek().walls[2]) {
+      var bottom  = grid[index(currentWay.lastPeek().i ,currentWay.lastPeek().j+1)];
 
       if(!bottom.wayVisited){
         counter++;
@@ -63,7 +54,8 @@ function tracePath(){
       
     }
 
-    if(top && !top.wall) {
+    if(!currentWay.lastPeek().walls[0]) {
+      var top     = grid[index(currentWay.lastPeek().i ,currentWay.lastPeek().j-1)];
 
       if(!top.wayVisited){
         counter++;
@@ -72,7 +64,8 @@ function tracePath(){
       }
     }
    
-    if(left && !left.wall) {
+    if(!currentWay.lastPeek().walls[3]) {
+      var left    = grid[index(currentWay.lastPeek().i-1 ,currentWay.lastPeek().j)];
 
       if(!left.wayVisited){
         counter++;
@@ -89,6 +82,9 @@ function tracePath(){
     else{
       if(counter > 1){
           crossNodes.push(currentWay.lastPeek());
+          console.log(currentWay.lastPeek());
+          console.log(counter);
+          console.log("-------------------------");
       }
       currentWay.lastPeek().wayVisited = true;
       traceNode.wayVisited = true;
@@ -101,10 +97,11 @@ function tracePath(){
   }
   
   function backToCrossNode(){
-    //var crossNode = checkCrossNodeIsDone();
+
     var crossNode = crossNodes.pop();
-    /*console.log("CrossNode");
-    console.log(crossNode);*/
+    /*console.log("......");
+    console.log(crossNode);
+    console.log("......");*/
       for(var i =0; i<currentWay.size();i++){
         if(currentWay.lastPeek() != crossNode)
           {
@@ -112,44 +109,15 @@ function tracePath(){
           }
       }
   }
-  function checkCrossNodeIsDone(){
-    var counter =0;
-    var right   = grid[index(crossNodes[crossNodes.length-1].i+1 ,crossNodes[crossNodes.length-1].j)];
-    var bottom  = grid[index(crossNodes[crossNodes.length-1].i ,crossNodes[crossNodes.length-1].j+1)];
-    var top     = grid[index(crossNodes[crossNodes.length-1].i ,crossNodes[crossNodes.length-1].j-1)];
-    var left    = grid[index(crossNodes[crossNodes.length-1].i-1 ,crossNodes[crossNodes.length-1].j)];
-    
-    
-    if(right && !right.wall){
-      if(!right.wayVisited){
-        counter++;
-      }
-    }
-  
-    if(bottom && !bottom.wall) {
-      if(!bottom.wayVisited){
-        counter++;
-      }
-    }
-
-    if(top && !top.wall ) {
-      if(!top.wayVisited){
-        counter++;
-      }
-    }
-    
-    if(left && !left.wall) {
-      if(!left.wayVisited){
-        counter++;
-      }
-    }
-
-    //if(counter ===3) console.log("4 way");
-    if(counter===3) return crossNodes[crossNodes.length-1];
-    //else if(grid[crossNodes.length-1] === grid[0]) return crossNodes[crossNodes.length-1];
-    else return crossNodes.pop();
-
-  }
   function isPathDone(){
     return currentWay.lastPeek() === finishNode;
+  }
+  function checkNeighbors(){
+    for(let i =0;i<grid.length;i++){
+      grid[i].walls[0] = grid[i].searchWalls(0,-1);
+      grid[i].walls[1] = grid[i].searchWalls(1,0);
+      grid[i].walls[2] = grid[i].searchWalls(0,1);
+      grid[i].walls[3] = grid[i].searchWalls(-1,0);
+      grid[i].frontier = false;
+    }
   }

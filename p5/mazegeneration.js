@@ -9,6 +9,7 @@ function generateMaze(){
     {
       current.maze = true;
       current.wall = false;
+      current.frontier = false;
       current.highlight();
       
       //STEP 1 FIND FRONTIERS
@@ -27,6 +28,7 @@ function generateMaze(){
       if(!(frontierNodes.length > 0)){
         isMazeDone = true;
         checkEndPoint();
+        checkNeighbors();
       }
     }
 }
